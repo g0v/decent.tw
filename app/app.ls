@@ -8,6 +8,10 @@ angular.module "App" <[app.templates ngMaterial ui.router]>
       url: '/about'
       templateUrl: 'app/partials/about.html'
       controller: "About"
+    .state 'companies' do
+      url: '/companies/:id'
+      templateUrl: 'app/partials/companies.html'
+      controller: "CompanyCtrl"
     # Catch all
   $urlRouterProvider
     .otherwise('/about')
@@ -35,3 +39,17 @@ angular.module "App" <[app.templates ngMaterial ui.router]>
 
 .controller About: <[$rootScope $http]> ++ ($rootScope, $http) ->
     $rootScope.activeTab = 'about'
+
+.controller CompanyCtrl: <[$scope $state $http]> ++ ($scope, $state, $http) ->
+  console.log \company
+  $scope.$watch '$state.params.id' -> if it
+    $scope.id = it
+    console.log \it $state
+    res <- $http.get 'https://beta.decent.tw/collections/companies' do
+      params: do
+        fc: 1
+        q: JSON.stringify do
+          id: $scope.id
+    .success
+    $scope.company = res.entries.0
+    console.log $scope.company
