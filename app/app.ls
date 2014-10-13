@@ -14,7 +14,7 @@ angular.module "App" <[app.templates ngMaterial ui.router]>
       controller: "CompanyCtrl"
     # Catch all
   $urlRouterProvider
-    .otherwise('/about')
+    .otherwise('/companies/59066479')
 
   # Without serve side support html5 must be disabled.
   $locationProvider.html5Mode true
@@ -41,10 +41,8 @@ angular.module "App" <[app.templates ngMaterial ui.router]>
     $rootScope.activeTab = 'about'
 
 .controller CompanyCtrl: <[$scope $state $http]> ++ ($scope, $state, $http) ->
-  console.log \company
   $scope.$watch '$state.params.id' -> if it
     $scope.id = it
-    console.log \it $state
     res <- $http.get 'https://beta.decent.tw/collections/companies' do
       params: do
         fc: 1
