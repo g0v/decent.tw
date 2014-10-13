@@ -1,8 +1,0 @@
-.about-content
-  h2 {{ id }} {{ company['公司名稱']}}
-
-  ul
-    li(ng-repeat="trademark in company.trademarks")
-      span {{ trademark['商標名稱'] }}( {{trademark.data['商品類別'] }} / {{ trademark.data['商品名稱'] }})
-      img(ng-src="http://api.decent.tw/img/{{ trademark['申請案號'] }}.jpg")
-
